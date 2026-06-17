@@ -1,4 +1,4 @@
-# Prova-Eliane 🎭 Cosplay World - Catálogo & Loja Virtual
+# Prova-Eliane 🎭 Moon Bloom - Catálogo & Loja Virtual
 
 Um e-commerce single-page (SPA) responsivo e minimalista focado na exibição, filtragem e compra de cosplays e acessórios temáticos. O projeto simula a experiência de grandes marketplaces (como o AliExpress), trazendo uma interface limpa onde o produto é o grande destaque.
 
