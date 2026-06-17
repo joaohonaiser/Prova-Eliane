@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Bloom Cosplays</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=301">
+</head>
+<body>
+    <div id="toastContainer" class="toast-container"></div>
+    <main>
+        <div class="banner-moon-bloom">
+    <h1 class="titulo-moon-bloom">Moon Bloom</h1>
+    
+    <div class="banner-actions">
+        <button class="icon-btn" id="cartToggleBtn">
+            🛒<span class="badge" id="cartBadge" hidden>0</span>
+        </button>
+        <button class="btn btn-primary" id="loginToggleBtn">Minha Conta</button>
+    </div>
+</div>
+        <section class="store-section">
+            <div class="store-toolbar">
+                <input type="text" id="searchInput" placeholder="Pesquisar cosplays (ex: Miku, Teto, Gojo)...">
+                <select id="sortSelect">
+                    <option value="all">Todos os Cosplays</option>
+                    <option value="price-asc">Menor Preço</option>
+                    <option value="price-desc">Maior Preço</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+        </section>
+    </main>
+
+    <div class="lightbox-modal" id="cartLightbox">
+        <div class="lightbox-backdrop" id="cartBackdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="cartCloseBtn">&times;</button>
+            <h2>Seu Carrinho</h2>
+            <div id="cartItemsContainer"></div>
+            <div class="cart-total-box">
+                <span>Total:</span>
+                <strong id="cartTotalValue">R$ 0,00</strong>
+            </div>
+            <button class="btn btn-primary" id="checkoutBtn" style="width: 100%; margin-top: 1.5rem;">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <div class="lightbox-modal" id="loginLightbox">
+        <div class="lightbox-backdrop" id="loginBackdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="loginCloseBtn">&times;</button>
+            
+            <div id="loginFormSection" class="auth-box">
+                <h2>Entrar na Conta</h2>
+                <form id="loginForm">
+                    <input type="email" id="loginEmail" class="auth-input" placeholder="Seu e-mail" required>
+                    <input type="password" id="loginPassword" class="auth-input" placeholder="Sua senha" required>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+                </form>
+                <p class="auth-switch">Não tem conta? <a href="#" id="switchToRegister">Cadastre-se aqui</a></p>
+            </div>
+
+            <div id="registerFormSection" class="auth-box" style="display: none;">
+                <h2>Criar Conta</h2>
+                <form id="registerForm">
+                    <input type="text" id="regName" class="auth-input" placeholder="Nome Completo" required>
+                    <input type="email" id="regEmail" class="auth-input" placeholder="E-mail" required>
+                    <input type="password" id="regPassword" class="auth-input" placeholder="Senha" required>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Avançar</button>
+                </form>
+                <p class="auth-switch">Já tem conta? <a href="#" id="switchToLogin">Fazer Login</a></p>
+            </div>
+
+            <div id="verificationSection" class="auth-box" style="display: none;">
+                <h2>Verificação de E-mail</h2>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Digite o código de 5 dígitos enviado para você:</p>
+                <form id="verificationForm">
+                    <input type="text" id="verificationCodeInput" class="auth-input" placeholder="Código de 5 dígitos" maxlength="5" required>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Ativar Conta</button>
+                    <button type="button" class="btn" id="cancelVerification" style="width: 100%; background: #ddd; margin-top: 0.5rem;">Cancelar</button>
+                </form>
+            </div>
+
+            <div id="userProfileSection" class="auth-box" style="display: none;">
+                <h2>Minha Conta</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">Olá, <strong id="loggedUserName">Usuário</strong>! 🎉</p>
+                <button class="btn" id="logoutBtn" style="width: 100%; background: #ff4a5a; color: white; margin-top: 2rem;">Sair da Conta</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox-modal" id="productLightbox">
+        <div class="lightbox-backdrop" id="productBackdrop"></div>
+        <div class="lightbox-content dynamic-product-box">
+            <button class="lightbox-close" id="productCloseBtn">&times;</button>
+            <div class="product-preview-layout">
+                <div class="preview-img-box">
+                    <img id="lightboxImg" src="" alt="Cosplay Preview">
+                </div>
+                <div class="preview-info-box">
+                    <span id="lightboxCategory" class="product-category">Categoria</span>
+                    <h2 id="lightboxTitle">Título do Cosplay</h2>
+                    <div class="preview-footer">
+                        <span id="lightboxPrice" class="product-price">R$ 0,00</span>
+                        <button class="btn btn-primary" id="lightboxAddCartBtn">+ Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "short_name": "CosplayWorld",
+  "name": "Cosplay World - Loja de Cosplays",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192?text=Cosplay",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://placehold.co/512x512?text=Cosplay",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#f4f4f7",
+  "theme_color": "#ff4757",
+  "display": "standalone",
+  "orientation": "portrait"
+}
