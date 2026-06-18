@@ -19,7 +19,11 @@ const PRODUCTS_DATA = [
     { id: 17, title: "Killua Zoldyck - Cosplay Completo", category: "Anime", price: 145.90, image: "Killua.webp" },
     { id: 18, title: "Astolfo - Cosplay Completo", category: "Anime", price: 579.90, image: "Astolfo.webp" },
     { id: 19, title: "Kaoruko Waguri - Cosplay Completo", category: "Anime", price: 852.97, image: "Waguri.webp" },
-    { id: 20, title: "Pomni - Cosplay Completo", category: "Glitch", price: 390.01, image: "Pomni.webp" }
+    { id: 20, title: "Pomni - Cosplay Completo", category: "Glitch", price: 390.01, image: "Pomni.webp" },
+    { id: 21, title: "Mangá Kaoru Hana Wa rin to saku - Volume 1", category: "Mangá", price: 59.80, image: "Kaoru.webp" },
+    { id: 22, title: "Mangá Demon Slayer - Volume 1", category: "Mangá", price: 39.99, image: "Demon slayer.jpg" },
+    { id: 23, title: "Mangá Jujutso Kaisen 0 - Edição Especial", category: "Mangá", price: 109.90, image: "Jujutsu o.jpeg" },
+    { id: 24, title: "Mangá One Piece - Volume 2", category: "Mangá", price: 45,70, image: "One Piece Vol -2.jpg" }
 ];
 
 const state = {
