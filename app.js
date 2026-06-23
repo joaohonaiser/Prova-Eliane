@@ -27,6 +27,8 @@ const PRODUCTS_DATA = [
     { id: 25, title: "Jax Floppy Hat", category: "Glitch", price: 55.00, image: "JaxFloppyHat4.webp" },
     { id: 26, title: "Bubble Hoodie", category: "Glitch", price: 145.00, image: "Bubble.webp" },
     { id: 27, title: "Jax Hooded Jacket", category: "Glitch", price: 150.00, image: "JaxBlusaa.webp" },
+    { id: 28, title: "Maid Jax Plushie", category: "Glitch", price: 150.00, image: "maid-jax-plush-2.webp" }
+
 ];
 
 const state = {
