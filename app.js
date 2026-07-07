@@ -342,3 +342,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+const bgMusic = qs('#bgMusic');
+const bgMusicSource = qs('#bgMusicSource');
+const musicToggleBtn = qs('#musicToggleBtn');
+
+if (bgMusic && bgMusicSource && musicToggleBtn) {
+  // Coloque aqui o link do arquivo de áudio (MP3/OGG) hospedado no seu site
+  bgMusicSource.src = 'joaohonaiser/Prova-Eliane/(OLD VERSION) Master Of Puppets - ft. Kasane Teto【SynthV Cover】 - Tangerines VA (youtube).mp3';
+
+  let isPlaying = false;
+
+  const updateButton = () => {
+    musicToggleBtn.textContent = isPlaying ? '⏸️ Música' : '▶️ Música';
+  };
+
+  const startMusic = async () => {
+    try {
+      bgMusic.volume = 0.3; // ajuste se quiser
+      await bgMusic.play();
+      isPlaying = true;
+      updateButton();
+    } catch (err) {
+      // geralmente acontece se o browser bloquear autoplay (ok: usuário clica no botão)
+      showToast('Clique na música para tocar.');
+    }
+  };
+
+  const pauseMusic = () => {
+    bgMusic.pause();
+    isPlaying = false;
+    updateButton();
+  };
+
+  safeAddEvent('#musicToggleBtn', 'click', async () => {
+    if (!isPlaying) startMusic();
+    else pauseMusic();
+  });
+
+  // opcional: sincronizar estado se terminar/der erro
+  bgMusic.addEventListener('play', () => {
+    isPlaying = true;
+    updateButton();
+  });
+  bgMusic.addEventListener('pause', () => {
+    isPlaying = false;
+    updateButton();
+  });
+}
