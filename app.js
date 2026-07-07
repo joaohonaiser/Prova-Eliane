@@ -190,49 +190,14 @@ function closeModal(modalId) {
 /* ==========================================================================
    EVENTOS PRINCIPAIS
    ========================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded'), () =>{
     renderProducts();
     updateCartBadge();
     updateAuthUI();
 
     let codigoGerado = null;
     let dadosTemporariosUsuario = null;
-
-    const safeAddEvent = (id, event, callback) => {
-        const el = qs(id);
-        if (el) el.addEventListener(event, callback);
-        const bgMusic = qs('#bgMusic');
-const bgMusicSource = qs('#bgMusicSource');
-const musicToggleBtn = qs('#musicToggleBtn');
-
-if (bgMusic && bgMusicSource && musicToggleBtn) {
-  // Coloque aqui o link do arquivo de áudio (MP3/OGG) hospedado no seu site
-  bgMusicSource.src = 'SEU_LINK_DO_MP3_OU_OGG_AQUI';
-
-  let isPlaying = false;
-
-  const updateButton = () => {
-    musicToggleBtn.textContent = isPlaying ? '⏸️ Música' : '▶️ Música';
-  };
-
-  const startMusic = async () => {
-    try {
-      bgMusic.volume = 0.3; // ajuste se quiser
-      await bgMusic.play();
-      isPlaying = true;
-      updateButton();
-    } catch (err) {
-      // geralmente acontece se o browser bloquear autoplay (ok: usuário clica no botão)
-      showToast('Clique na música para tocar.');
-    }
-  };
-
-  const pauseMusic = () => {
-    bgMusic.pause();
-    isPlaying = false;
-    updateButton();
-  };
-
+}
   safeAddEvent('#musicToggleBtn', 'click', async () => {
     if (!isPlaying) startMusic();
     else pauseMusic();
@@ -247,7 +212,7 @@ if (bgMusic && bgMusicSource && musicToggleBtn) {
     isPlaying = false;
     updateButton();
   });
-};
+
 
     safeAddEvent('#searchInput', 'input', (e) => { state.searchQuery = e.target.value; renderProducts(); });
     safeAddEvent('#sortSelect', 'change', (e) => { state.sortBy = e.target.value; renderProducts(); });
@@ -387,4 +352,3 @@ if (bgMusic && bgMusicSource && musicToggleBtn) {
             closeModal('#cartLightbox');
         }
     });
-    }
