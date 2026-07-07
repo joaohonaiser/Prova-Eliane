@@ -190,33 +190,7 @@ function closeModal(modalId) {
 /* ==========================================================================
    EVENTOS PRINCIPAIS
    ========================================================================== */
-document.addEventListener('DOMContentLoaded'), () =>{
-    renderProducts();
-    updateCartBadge();
-    updateAuthUI();
-
-    let codigoGerado = null;
-    let dadosTemporariosUsuario = null;
-}
-  safeAddEvent('#musicToggleBtn', 'click', async () => {
-    if (!isPlaying) startMusic();
-    else pauseMusic();
-  });
-
-  // opcional: sincronizar estado se terminar/der erro
-  bgMusic.addEventListener('play', () => {
-    isPlaying = true;
-    updateButton();
-  });
-  bgMusic.addEventListener('pause', () => {
-    isPlaying = false;
-    updateButton();
-  });
-
-
-    safeAddEvent('#searchInput', 'input', (e) => { state.searchQuery = e.target.value; renderProducts(); });
-    safeAddEvent('#sortSelect', 'change', (e) => { state.sortBy = e.target.value; renderProducts(); });
-
+{
     const grid = qs('#productsGrid');
     if (grid) {
         grid.addEventListener('click', (e) => {
@@ -239,7 +213,7 @@ document.addEventListener('DOMContentLoaded'), () =>{
             }
         });
     }
-
+}
     safeAddEvent('#cartToggleBtn', 'click', () => openModal('#cartLightbox'));
     safeAddEvent('#cartCloseBtn', 'click', () => closeModal('#cartLightbox'));
     safeAddEvent('#cartBackdrop', 'click', () => closeModal('#cartLightbox'));
