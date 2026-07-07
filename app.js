@@ -201,7 +201,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const safeAddEvent = (id, event, callback) => {
         const el = qs(id);
         if (el) el.addEventListener(event, callback);
-    };
+        const bgMusic = qs('#bgMusic');
+const bgMusicSource = qs('#bgMusicSource');
+const musicToggleBtn = qs('#musicToggleBtn');
+
+if (bgMusic && bgMusicSource && musicToggleBtn) {
+  // Coloque aqui o link do arquivo de áudio (MP3/OGG) hospedado no seu site
+  bgMusicSource.src = 'SEU_LINK_DO_MP3_OU_OGG_AQUI';
+
+  let isPlaying = false;
+
+  const updateButton = () => {
+    musicToggleBtn.textContent = isPlaying ? '⏸️ Música' : '▶️ Música';
+  };
+
+  const startMusic = async () => {
+    try {
+      bgMusic.volume = 0.3; // ajuste se quiser
+      await bgMusic.play();
+      isPlaying = true;
+      updateButton();
+    } catch (err) {
+      // geralmente acontece se o browser bloquear autoplay (ok: usuário clica no botão)
+      showToast('Clique na música para tocar.');
+    }
+  };
+
+  const pauseMusic = () => {
+    bgMusic.pause();
+    isPlaying = false;
+    updateButton();
+  };
+
+  safeAddEvent('#musicToggleBtn', 'click', async () => {
+    if (!isPlaying) startMusic();
+    else pauseMusic();
+  });
+
+  // opcional: sincronizar estado se terminar/der erro
+  bgMusic.addEventListener('play', () => {
+    isPlaying = true;
+    updateButton();
+  });
+  bgMusic.addEventListener('pause', () => {
+    isPlaying = false;
+    updateButton();
+  });
+};
 
     safeAddEvent('#searchInput', 'input', (e) => { state.searchQuery = e.target.value; renderProducts(); });
     safeAddEvent('#sortSelect', 'change', (e) => { state.sortBy = e.target.value; renderProducts(); });
@@ -341,51 +387,4 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal('#cartLightbox');
         }
     });
-});
-const bgMusic = qs('#bgMusic');
-const bgMusicSource = qs('#bgMusicSource');
-const musicToggleBtn = qs('#musicToggleBtn');
-
-if (bgMusic && bgMusicSource && musicToggleBtn) {
-  // Coloque aqui o link do arquivo de áudio (MP3/OGG) hospedado no seu site
-  bgMusicSource.src = 'joaohonaiser/Prova-Eliane/(OLD VERSION) Master Of Puppets - ft. Kasane Teto【SynthV Cover】 - Tangerines VA (youtube).mp3';
-
-  let isPlaying = false;
-
-  const updateButton = () => {
-    musicToggleBtn.textContent = isPlaying ? '⏸️ Música' : '▶️ Música';
-  };
-
-  const startMusic = async () => {
-    try {
-      bgMusic.volume = 0.3; // ajuste se quiser
-      await bgMusic.play();
-      isPlaying = true;
-      updateButton();
-    } catch (err) {
-      // geralmente acontece se o browser bloquear autoplay (ok: usuário clica no botão)
-      showToast('Clique na música para tocar.');
     }
-  };
-
-  const pauseMusic = () => {
-    bgMusic.pause();
-    isPlaying = false;
-    updateButton();
-  };
-
-  safeAddEvent('#musicToggleBtn', 'click', async () => {
-    if (!isPlaying) startMusic();
-    else pauseMusic();
-  });
-
-  // opcional: sincronizar estado se terminar/der erro
-  bgMusic.addEventListener('play', () => {
-    isPlaying = true;
-    updateButton();
-  });
-  bgMusic.addEventListener('pause', () => {
-    isPlaying = false;
-    updateButton();
-  });
-}
