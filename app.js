@@ -28,8 +28,11 @@ const PRODUCTS_DATA = [
     { id: 26, title: "Bubble Hoodie", category: "Glitch", price: 145.00, image: "Bubble.webp" },
     { id: 27, title: "Jax Hooded Jacket", category: "Glitch", price: 150.00, image: "JaxBlusaa.webp" },
     { id: 28, title: "Maid Jax Plushie", category: "Glitch", price: 150.00, image: "maid-jax-plush-2.webp" }
-
 ];
+
+// ⚙️ VARIÁVEIS GLOBAIS DECLARADAS CORRETAMENTE
+let codigoGerado = '';
+let dadosTemporariosUsuario = {};
 
 const state = {
     products: PRODUCTS_DATA,
@@ -43,6 +46,14 @@ const state = {
 
 const qs = (el) => document.querySelector(el);
 const formatPrice = (val) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val);
+
+// 🔧 FUNÇÃO AUXILIAR PARA ADICIONAR EVENTOS COM SEGURANÇA
+function safeAddEvent(selector, event, callback) {
+    const element = qs(selector);
+    if (element) {
+        element.addEventListener(event, callback);
+    }
+}
 
 /* 🎨 RE-RENDERIZAR VITRINE COMPATÍVEL COM GRID */
 function renderProducts() {
@@ -190,7 +201,13 @@ function closeModal(modalId) {
 /* ==========================================================================
    EVENTOS PRINCIPAIS
    ========================================================================== */
-{
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa a página
+    renderProducts();
+    updateCartBadge();
+    updateAuthUI();
+
+    // Eventos da grade de produtos
     const grid = qs('#productsGrid');
     if (grid) {
         grid.addEventListener('click', (e) => {
@@ -213,25 +230,30 @@ function closeModal(modalId) {
             }
         });
     }
-}
+
+    // Eventos do carrinho
     safeAddEvent('#cartToggleBtn', 'click', () => openModal('#cartLightbox'));
     safeAddEvent('#cartCloseBtn', 'click', () => closeModal('#cartLightbox'));
     safeAddEvent('#cartBackdrop', 'click', () => closeModal('#cartLightbox'));
     
+    // Eventos de login
     safeAddEvent('#loginToggleBtn', 'click', () => openModal('#loginLightbox'));
     safeAddEvent('#loginCloseBtn', 'click', () => closeModal('#loginLightbox'));
     safeAddEvent('#loginBackdrop', 'click', () => closeModal('#loginLightbox'));
 
+    // Eventos do lightbox de produto
     safeAddEvent('#productCloseBtn', 'click', () => closeModal('#productLightbox'));
     safeAddEvent('#productBackdrop', 'click', () => closeModal('#productLightbox'));
     safeAddEvent('#lightboxAddCartBtn', 'click', () => { addToCart(state.currentId); closeModal('#productLightbox'); });
 
+        // Eventos do carrinho (remover itens)
     safeAddEvent('#cartItemsContainer', 'click', (e) => {
         if (e.target.classList.contains('remove-cart-item-btn')) {
             removeFromCart(parseInt(e.target.dataset.id));
         }
     });
 
+    // Eventos de alternar entre login e registro
     safeAddEvent('#switchToRegister', 'click', (e) => { 
         e.preventDefault(); 
         if(qs('#loginFormSection')) qs('#loginFormSection').style.display = 'none'; 
@@ -250,6 +272,7 @@ function closeModal(modalId) {
         if(qs('#registerFormSection')) qs('#registerFormSection').style.display = 'block'; 
     });
 
+    // Evento de registro
     safeAddEvent('#registerForm', 'submit', (e) => {
         e.preventDefault();
         const name = qs('#regName').value;
@@ -266,6 +289,7 @@ function closeModal(modalId) {
         showToast("Código enviado! Verifique seu e-mail.");
     });
 
+    // Evento de verificação de código
     safeAddEvent('#verificationForm', 'submit', (e) => {
         e.preventDefault();
         const codigoDigitado = qs('#verificationCodeInput').value.trim();
@@ -286,6 +310,7 @@ function closeModal(modalId) {
         }
     });
 
+    // Evento de login
     safeAddEvent('#loginForm', 'submit', (e) => {
         e.preventDefault();
         const email = qs('#loginEmail').value;
@@ -306,6 +331,7 @@ function closeModal(modalId) {
         }
     });
 
+    // Evento de logout
     safeAddEvent('#logoutBtn', 'click', () => {
         state.currentUser = null;
         localStorage.removeItem('cc_user');
@@ -314,6 +340,7 @@ function closeModal(modalId) {
         closeModal('#loginLightbox');
     });
 
+    // Evento de checkout
     safeAddEvent('#checkoutBtn', 'click', () => {
         if (!state.currentUser) {
             showToast("Você precisa fazer login para comprar! 🔐");
@@ -326,3 +353,4 @@ function closeModal(modalId) {
             closeModal('#cartLightbox');
         }
     });
+}); // FIM DO DOMContentLoaded
